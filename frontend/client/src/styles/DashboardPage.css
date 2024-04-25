@@ -1,0 +1,25 @@
+/* DashboardPage.css */
+.dashboard-page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Utiliza todo el alto de la pantalla */
+  }
+  
+  .dashboard-main {
+    display: flex;
+    flex: 1; /* Toma el espacio restante después del navbar */
+  }
+  
+  /* Suponiendo que quieras un sidebar colapsable o fijo, puedes ajustar el ancho aquí */
+  .sidebar {
+    width: 250px; /* Ajusta el ancho según tu diseño */
+    border-right: 1px solid #e0e0e0; /* Línea divisoria sutil */
+  }
+  
+  /* Adapta tus estilos de cuadrícula de productos aquí */
+  .product-grid {
+    flex-grow: 1; /* Toma el espacio restante */
+    overflow-y: auto; /* Permite desplazamiento si los productos exceden la altura de la pantalla */
+    padding: 20px; /* Espaciado alrededor de los productos */
+  }
+  

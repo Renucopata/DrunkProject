@@ -1,0 +1,51 @@
+/* ProductGrid.css */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 20px;
+    padding: 20px;
+    width: calc(100% - 250px); /* Asumiendo que tu sidebar tiene un ancho de 250px */
+    margin-left: 250px; /* Mismo ancho que el sidebar */
+    box-sizing: border-box;
+  }
+  
+  .product-card {
+    background-color: #fff;
+    border: 1px solid #e1e1e1;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative; /* Para posicionar absolutamente el descuento y los íconos favoritos */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  .product-image {
+    background-color: #f9f9f9;
+    height: 200px;
+    position: relative; /* Para posicionar el ícono de favoritos */
+  }
+  
+  .product-sale {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: red;
+    color: white;
+    padding: 5px;
+  }
+  
+  .product-details {
+    padding: 15px;
+  }
+  
+  .product-price {
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .product-sold {
+    color: #666;
+    font-size: 0.875rem;
+  }
+  
+  /* Agrega estilos para las estrellas de rating y el ícono de favoritos aquí */
+  

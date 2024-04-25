@@ -1,32 +1,43 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import '../styles/LoginPage.css'; // Verifica que la ruta sea la correcta
 
-function LoginPage() {
-  const [username, setUsername] = useState('');
+function LoginPage({ onLogin }) {
+  // Estados para nombre, apellido y nombre de usuario
+  const [nombre, setNombre] = useState('');
+  const [apellido, setApellido] = useState('');
+  const [username, setUsername] = useState(''); // Cambiado de email a username
   const [password, setPassword] = useState('');
 
-  const handleLogin = (e) => {
+  const handleRegister = (e) => {
     e.preventDefault();
-    axios.post('/api/login', { username, password })
-      .then(response => {
-        // Handle the successful login response
-        // Store the token or session in local storage or state
-        // Redirect the user to the dashboard or another protected route
-      })
-      .catch(error => {
-        // Handle the login error
-      });
+    // Aquí iría la lógica para manejar la creación de un nuevo usuario
+    onLogin();
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleLogin}>
+    <div className="register-container">
+      <div className="logo">Logo</div> {/* Reemplaza esto por tu logo */}
+      <h1>Ingresa tus datos</h1>
+      <form onSubmit={handleRegister}>
+        <div>
+          <input
+            type="text"
+            placeholder="Nombre"
+            value={nombre}
+            onChange={(e) => setNombre(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Apellido"
+            value={apellido}
+            onChange={(e) => setApellido(e.target.value)}
+          />
+        </div>
         <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          type="text" // Cambiado de type="email" a type="text"
+          placeholder="Nombre de usuario" // Cambiado de "Email" a "Nombre de usuario"
+          value={username} // Actualizado a username
+          onChange={(e) => setUsername(e.target.value)} // Actualizado a setUsername
         />
         <input
           type="password"
@@ -34,7 +45,7 @@ function LoginPage() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Login</button>
+        <button type="submit">Register</button>
       </form>
     </div>
   );
