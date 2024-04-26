@@ -7,8 +7,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleLogin = () => {
-    // You would have your login logic here, such as making API calls to authenticate the user
-    // For the sake of this example, I'm just setting isLoggedIn to true when the user logs in
+    
     setIsLoggedIn(true);
   };
 
