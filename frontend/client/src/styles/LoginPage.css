@@ -1,0 +1,75 @@
+.register-container {
+    background-color: #fff; /* Fondo blanco para el formulario */
+    max-width: 400px; /* Ajusta esto según el ancho deseado */
+    margin: 50px auto; /* Centra el formulario en la página */
+    padding: 20px;
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  }
+  
+  .register-container .logo {
+    display: block;
+    margin: 0 auto 20px; /* Centrar logo y añadir margen inferior */
+    /* Añade aquí más estilos para tu logo */
+  }
+  
+  .register-container h1 {
+    color: #333; /* Color de texto oscuro */
+    text-align: center;
+    margin-bottom: 20px; /* Espacio debajo del título */
+  }
+  
+  .register-container form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .register-container form div {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .register-container input {
+    padding: 10px;
+    margin-bottom: 15px; /* Espacio entre campos de entrada */
+    border: 1px solid #ccc; /* Borde de color gris claro */
+    border-radius: 4px; /* Bordes redondeados en los campos de entrada */
+  }
+  
+  .register-container input[type="email"],
+  .register-container input[type="password"] {
+    width: 100%; /* Hace que los campos email y password ocupen el ancho completo */
+  }
+  
+  .register-container button {
+    padding: 10px 20px;
+    background-color: #333; /* Color de fondo del botón */
+    color: white; /* Color de texto del botón */
+    border: none;
+    border-radius: 4px; /* Bordes redondeados del botón */
+    cursor: pointer; /* Cursor de mano al pasar sobre el botón */
+    margin-top: 10px; /* Espacio arriba del botón */
+  }
+  
+  .register-container button:hover {
+    background-color: #555; /* Color de fondo del botón al pasar el cursor */
+  }
+  
+  /* Estilos para los campos de nombre y apellido cuando están uno al lado del otro */
+  .register-container input[type="text"]:first-child,
+  .register-container input[type="text"]:last-child {
+    width: 48%; /* Ajusta el ancho para que quepan dos en la fila */
+  }
+  
+  /* Ajuste de respuesta para dispositivos móviles */
+  @media (max-width: 500px) {
+    .register-container form div {
+      flex-direction: column;
+    }
+    
+    .register-container input[type="text"]:first-child,
+    .register-container input[type="text"]:last-child {
+      width: 100%; /* Los campos de texto deben ocupar el ancho completo en móviles */
+    }
+  }
+  

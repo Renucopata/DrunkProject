@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import LoginPage from './pages/LoginPage';
-import DashboardPage from'./pages/DashboardPage';
+import DashboardPage from './pages/DashboardPage';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleLogin = () => {
-    
+    // Aquí establecemos isLoggedIn en true sin importar los datos ingresados
     setIsLoggedIn(true);
   };
 
