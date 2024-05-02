@@ -8,4 +8,17 @@ const pool = new Pool({
   database: "DrunkDB"
 });
 
-module.exports = pool;
+module.exports = {
+  connect: () => {
+    pool.connect((err) => {
+      if (err) {
+        console.error('Error connecting to database', err);
+      } else {
+        console.log('Connected to database');
+      }
+    });
+  },
+  query: (text, params, callback) => {
+    return pool.query(text, params, callback);
+  },
+};

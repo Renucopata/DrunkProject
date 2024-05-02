@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
-const pool = require("../db");
 
-const jwtGenerator = require("../utils/jwtGenerator");
-const authorize = require("../middleware/authorize");
+const db = require('../db');
+
+//const jwtGenerator = require("../utils/jwtGenerator");
+//const authorize = require("../middleware/authorize");
 
 //authorizeentication
 
@@ -12,32 +13,31 @@ router.post("/register", async (req, res) => {
   const { username, first_name, last_name,  password_hash } = req.body;
 
   try {
-    const user = await pool.query("SELECT * FROM users WHERE user_email = $1", [
-      username
-    ]);
-
-    if (user.rows.length > 0) {
+    const query = 'SELECT * FROM users WHERE username = $1';
+    db.query(query, [username], (err, result) => {
+        
+   if (result.rows.length > 0) {
       return res.status(401).json("User already exist!");
     }
+    });
 
-    const salt = await bcrypt.genSalt(10);
-    const bcryptPassword = await bcrypt.hash(password_hash, salt);
+   // const salt =  bcrypt.genSalt(10);
+    //const bcryptPassword =  bcrypt.hash(password_hash, salt);
+    const insertQuery = 'INSERT INTO users (username, first_name, last_name, password_hash) VALUES ($1, $2, $3, $4)';
+    db.query(insertQuery, [username, first_name, last_name,  password_hash], (err, result) => {
+      /*if(result.rows.length > 0){
+        return res.status(200).json("Register was succesful")
+      }*/
+      return res.json(result)
+    });
 
-    let newUser = await pool.query(
-      "INSERT INTO users (username, first_name, last_name,  password_hash) VALUES ($1, $2, $3, $4) RETURNING *",
-      [username, first_name, last_name,  bcryptPassword]
-    );
-
-    const jwtToken = jwtGenerator(newUser.rows[0].user_id);
-
-    return res.json({ jwtToken });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
   }
 });
 
-router.post("/login", async (req, res) => {
+/*router.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
   try {
@@ -73,5 +73,5 @@ router.post("/verify", authorize, (req, res) => {
     res.status(500).send("Server error");
   }
 });
-
+*/
 module.exports = router;
