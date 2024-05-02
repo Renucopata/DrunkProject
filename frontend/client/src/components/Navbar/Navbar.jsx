@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaSearch } from 'react-icons/fa';
+import { Link } from 'react-router-dom'; // Importa Link de react-router-dom
 import '../../styles/Navbar.css'; // Asegúrate de que la ruta refleja la ubicación real del archivo CSS
 
 const Navbar = () => {
@@ -13,9 +14,9 @@ const Navbar = () => {
         </button>
       </div>
       <div className="navbar-links">
-        {/* Agrega enlaces adicionales o componentes de perfil de usuario aquí si es necesario */}
-        <a href="/profile">Perfil</a>
-        <a href="/settings">Configuración</a>
+        {/* Utiliza el componente Link para la navegación */}
+        <Link to="/profile">Perfil</Link>
+        <Link to="/convocatoria">Convocatorias</Link> {/* Asegúrate de que la ruta coincida con la definida en tus Routes */}
       </div>
     </nav>
   );
