@@ -1,69 +1,82 @@
+:root {
+  --primary-color: #3B5FDB; /* Azul */
+  --secondary-color: #d2cfcf; /* Blanco medio plomo (gris claro) */
+  --text-color: #3B5FDB; /* Azul para el texto, para contraste */
+  --bg-color: #d2cfcf; /* Fondo secundario */
+  --highlight-color: #d2cfcf; /* Blanco para resaltar (si necesario) */
+}
+
 /* Estilos generales de la página */
 .convocatoria-page {
-  padding: 20px; /* Espaciado interno para toda la página */
-  position: relative; /* Necesario para el posicionamiento absoluto de elementos dentro */
+    padding: 20px;
+    position: relative;
+    background-color: var(--bg-color);
 }
 
 /* Encabezado de la página con los botones */
 .convocatoria-header {
-  display: flex;
-  justify-content: space-between; /* Separa el título y los botones */
-  align-items: center; /* Alineación vertical de los elementos */
-  margin-bottom: 20px; /* Espaciado debajo del encabezado */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 /* Botón para regresar al dashboard */
 .return-dashboard-btn {
-  padding: 8px 16px;
-  background-color: #007bff; /* Azul estándar */
-  color: white;
-  text-decoration: none;
-  border-radius: 4px;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-  margin-right: auto; /* Empuja el botón hacia la derecha */
+    padding: 8px 16px;
+    background-color: var(--primary-color);
+    color: var(--highlight-color);
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    margin-right: auto;
 }
 
 .return-dashboard-btn:hover {
-  background-color: #0056b3; /* Azul más oscuro al pasar el mouse */
+    background-color: var(--highlight-color);
+    color: var(--primary-color);
 }
 
 /* Botón para añadir nuevas convocatorias */
 .add-convocatoria-btn {
-  padding: 8px 16px;
-  background-color: #4CAF50; /* Verde para acciones positivas */
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-left: 10px; /* Separación del botón de regreso */
-  font-weight: bold;
+    padding: 8px 16px;
+    background-color: var(--primary-color);
+    color: var(--highlight-color);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+    font-weight: bold;
 }
 
 .add-convocatoria-btn:hover {
-  background-color: #45a049; /* Verde más oscuro al pasar el mouse */
+    background-color: var(--highlight-color);
+    color: var(--primary-color);
 }
 
 /* Estilos del contenedor de la tabla */
 .table-container {
-  margin-top: 20px; /* Espacio por encima del contenedor de la tabla */
-  background: #fff; /* Fondo blanco para el contenedor de la tabla */
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Sombra sutil */
-  padding: 20px; /* Espaciado interno */
-  border-radius: 8px; /* Bordes redondeados */
+    margin-top: 20px;
+    background: var(--secondary-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 8px;
 }
 
 /* Estilos de la tabla */
 .convocatoria-table {
-  width: 100%; /* Ocupa todo el ancho disponible */
-  border-collapse: collapse; /* Colapsa los bordes de las celdas */
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--bg-color);
 }
 
-.convocatoria-table th, .convocatoria-table td {
-  text-align: left;
-  padding: 8px; /* Espaciado dentro de las celdas */
-  border-bottom: 1px solid #e1e1e1; /* Línea separadora entre filas */
+.convocatoria-table th,
+.convocatoria-table td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #e1e1e1;
 }
 
 /* Estilos para los estados de las convocatorias */
@@ -74,46 +87,49 @@
 
 /* Estilos para el modal */
 .modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparente para el fondo */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1050; /* Asegura que esté por encima de otros elementos */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1050;
 }
 
 .modal-content {
-  background: white;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Sombra para dar efecto elevado */
-  width: 80%;
-  max-width: 600px; /* Ancho máximo para evitar que sea demasiado grande */
+    background: var(--bg-color);
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 80%;
+    max-width: 600px;
 }
 
 .modal-content h2 {
-  margin-top: 0; /* Quita el margen superior para el título del modal */
+    margin-top: 0;
+    color: var(--text-color);
 }
 
-.modal-content input, .modal-content button {
-  width: 100%; /* Los inputs y botones ocupan todo el ancho disponible */
-  padding: 10px;
-  margin-top: 10px; /* Espaciado superior para separar elementos */
-  box-sizing: border-box; /* El padding y borde cuentan dentro del ancho total */
+.modal-content input,
+.modal-content button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    box-sizing: border-box;
 }
 
 .modal-content button {
-  background-color: #007bff; /* Azul estándar para botones */
-  color: white;
-  border-radius: 4px;
-  cursor: pointer;
-  border: none;
+    background-color: var(--primary-color);
+    color: var(--highlight-color);
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
 }
 
 .modal-content button:hover {
-  background-color: #0056b3; /* Azul más oscuro al pasar el mouse */
+    background-color: var(--highlight-color);
+    color: var(--primary-color);
 }

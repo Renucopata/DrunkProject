@@ -1,22 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
-import { Link } from 'react-router-dom'; // Importa Link de react-router-dom
-import '../../styles/Navbar.css'; // Asegúrate de que la ruta refleja la ubicación real del archivo CSS
+import { Link } from 'react-router-dom';
+import '../../styles/Navbar.css';
 
-const Navbar = () => {
+const Navbar = ({ onSearch }) => {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
+    onSearch(searchTerm);  // Llama a la función onSearch con el término actual
+  };
+
   return (
     <nav className="navbar">
-      <div className="logo">Logo</div> {/* Reemplaza esto con tu componente de logo o imagen */}
+      <div className="logo">Logo</div>
       <div className="search-bar">
-        <input type="text" placeholder="Buscar productos, servicios..." />
-        <button type="submit">
-          <FaSearch />
-        </button>
+        <form onSubmit={handleSearchSubmit}>
+          <input
+            type="text"
+            placeholder="Buscar productos, servicios..."
+            value={searchTerm}
+            onChange={handleSearchChange}
+          />
+          <button type="submit">
+            <FaSearch />
+          </button>
+        </form>
       </div>
       <div className="navbar-links">
-        {/* Utiliza el componente Link para la navegación */}
         <Link to="/profile">Perfil</Link>
-        <Link to="/convocatoria">Convocatorias</Link> {/* Asegúrate de que la ruta coincida con la definida en tus Routes */}
+        <Link to="/convocatoria">Convocatorias</Link>
       </div>
     </nav>
   );

@@ -1,16 +1,22 @@
-import React from 'react';
-import Navbar from '../components/Navbar/Navbar'; // Asume que tienes un archivo Navbar.jsx
-import Sidebar from '../components/Sidebar/Sidebar'; // Asume que tienes un archivo Sidebar.jsx
-import ProductGrid from '../components/ProductGrid/ProductGrid'; // Asume que tienes un archivo ProductGrid.jsx
-import '../styles/DashboardPage.css'; // El CSS para DashboardPage
+import React, { useState } from 'react';
+import Navbar from '../components/Navbar/Navbar';
+import Sidebar from '../components/Sidebar/Sidebar';
+import ProductGrid from '../components/ProductGrid/ProductGrid';
+import '../styles/DashboardPage.css';
 
 const DashboardPage = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearch = (term) => {
+    setSearchTerm(term);
+  };
+
   return (
     <div className="dashboard-page">
-      <Navbar />
+      <Navbar onSearch={handleSearch} />
       <div className="dashboard-main">
         <Sidebar />
-        <ProductGrid />
+        <ProductGrid searchTerm={searchTerm} />
       </div>
     </div>
   );
