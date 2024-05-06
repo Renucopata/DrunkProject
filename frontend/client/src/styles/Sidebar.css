@@ -1,14 +1,14 @@
 :root {
   --primary-color: #3B5FDB; /* Azul */
-  --secondary-color: #f5f5f5; /* Blanco medio plomo (gris claro) */
-  --text-color: #3B5FDB; /* Azul para el texto, para contraste */
-  --bg-color: #f5f5f5; /* Fondo secundario */
+  --secondary-color: #d2cfcf; /* Blanco medio plomo (gris claro) */
+  --text-color: #000000; /* Negro para un mejor contraste */
+  --bg-color: #d2cfcf; /* Fondo secundario */
   --highlight-color: #ffffff; /* Blanco para resaltar (si necesario) */
 }
 
 .sidebar {
     background-color: var(--primary-color); /* Fondo azul para toda la barra lateral */
-    color: var(--highlight-color); /* Texto en blanco para contraste */
+    color: var(--text-color); /* Texto negro para mejor contraste */
     padding: 20px;
 }
 
@@ -21,7 +21,7 @@
     justify-content: space-between;
     align-items: center;
     background-color: var(--secondary-color); /* Fondo gris claro para cada sección */
-    color: var(--text-color); /* Texto azul para visibilidad */
+    color: var(--text-color); /* Texto negro para visibilidad */
     border: none;
     padding: 10px;
     width: 100%;
@@ -47,8 +47,8 @@
     margin: 5px 0;
 }
 
-.filter-checkbox input[type="checkbox"] {
-    margin-right: 10px;
+.filter-checkbox label {
+    color: var(--text-color); /* Asegurarse de que el texto de las etiquetas es negro */
 }
 
 .filter-range input[type="range"] {

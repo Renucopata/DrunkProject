@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
-import ConvocatoriaPage from './pages/ConvocatoriaPage'; // Importación del componente ConvocatoriaPage
+import ConvocatoriaPage from './pages/ConvocatoriaPage';
+import HistorialPage from './pages/HistorialPage'; // Importa aquí tu HistorialPage
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -16,8 +17,10 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/login" element={!isLoggedIn ? <LoginPage onLogin={handleLogin} /> : <Navigate replace to="/" />} />
-          <Route path="/convocatoria" element={<ConvocatoriaPage />} /> {/* Asegúrate de que el path coincide con el nombre del archivo */}
+          <Route path="/historial" element={isLoggedIn ? <HistorialPage /> : <Navigate replace to="/login" />} /> {/* Ruta para HistorialPage con protección de autenticación */}
+          <Route path="/convocatoria" element={isLoggedIn ? <ConvocatoriaPage /> : <Navigate replace to="/login" />} /> {/* Protección de autenticación también añadida aquí */}
           <Route path="/" element={isLoggedIn ? <DashboardPage /> : <Navigate replace to="/login" />} />
+          {/* Agrega aquí otras rutas según sea necesario */}
         </Routes>
       </div>
     </Router>

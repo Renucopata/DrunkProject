@@ -32,7 +32,7 @@ const Navbar = ({ onSearch }) => {
         </form>
       </div>
       <div className="navbar-links">
-        <Link to="/profile">Perfil</Link>
+        <Link to="/historial">Historial</Link> {/* Cambiado para apuntar a la ruta de HistorialPage */}
         <Link to="/convocatoria">Convocatorias</Link>
       </div>
     </nav>
