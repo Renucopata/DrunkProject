@@ -17,8 +17,6 @@ const AccordionSection = ({ title, children }) => {
 };
 
 const Sidebar = () => {
-  // Agrega aquí la lógica para el estado de los filtros
-
   return (
     <aside className="sidebar">
       <AccordionSection title="Marca">
@@ -34,7 +32,6 @@ const Sidebar = () => {
           <input type="checkbox" id="pattio" name="pattio" />
           <label htmlFor="pattio">Pattio</label>
         </div>
-        {/* Agrega más marcas si es necesario */}
       </AccordionSection>
 
       <AccordionSection title="Precio">
@@ -44,7 +41,69 @@ const Sidebar = () => {
         </div>
       </AccordionSection>
 
-      {/* Agrega aquí más secciones de filtros según tu imagen */}
+      <AccordionSection title="Cantidad">
+        <div className="filter-checkbox">
+          <input type="checkbox" id="1-50" name="1-50" />
+          <label htmlFor="1-50">1-50</label>
+        </div>
+        <div className="filter-checkbox">
+          <input type="checkbox" id="51-200" name="51-200" />
+          <label htmlFor="51-200">51-200</label>
+        </div>
+        <div className="filter-checkbox">
+          <input type="checkbox" id="200+" name="200+" />
+          <label htmlFor="200+">200+</label>
+        </div>
+      </AccordionSection>
+
+      <AccordionSection title="Descuentos">
+        <div className="filter-checkbox">
+          <input type="checkbox" id="allDiscounts" name="allDiscounts" />
+          <label htmlFor="allDiscounts">All Discounts</label>
+        </div>
+        <div className="filter-checkbox">
+          <input type="checkbox" id="todaysDeals" name="todaysDeals" />
+          <label htmlFor="todaysDeals">Today's Deals</label>
+        </div>
+      </AccordionSection>
+
+      <AccordionSection title="Nuevos">
+        <div className="filter-checkbox">
+          <input type="checkbox" id="last7days" name="last7days" />
+          <label htmlFor="last7days">Last 7 days</label>
+        </div>
+        <div className="filter-checkbox">
+          <input type="checkbox" id="last30days" name="last30days" />
+          <label htmlFor="last30days">Last 30 days</label>
+        </div>
+        <div className="filter-checkbox">
+          <input type="checkbox" id="last60days" name="last60days" />
+          <label htmlFor="last60days">Last 60 days</label>
+        </div>
+      </AccordionSection>
+
+      <AccordionSection title="Rating">
+        <div className="filter-checkbox">
+          <input type="checkbox" id="1star" name="rating" value="1" />
+          <label htmlFor="1star">★☆☆☆☆</label>
+        </div>
+        <div className="filter-checkbox">
+          <input type="checkbox" id="2stars" name="rating" value="2" />
+          <label htmlFor="2stars">★★☆☆☆</label>
+        </div>
+        <div className="filter-checkbox">
+          <input type="checkbox" id="3stars" name="rating" value="3" />
+          <label htmlFor="3stars">★★★☆☆</label>
+        </div>
+        <div className="filter-checkbox">
+          <input type="checkbox" id="4stars" name="rating" value="4" />
+          <label htmlFor="4stars">★★★★☆</label>
+        </div>
+        <div className="filter-checkbox">
+          <input type="checkbox" id="5stars" name="rating" value="5" />
+          <label htmlFor="5stars">★★★★★</label>
+        </div>
+      </AccordionSection>
     </aside>
   );
 };

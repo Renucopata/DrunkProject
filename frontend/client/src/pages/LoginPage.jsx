@@ -1,17 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/LoginPage.css'; // Verifica que la ruta sea la correcta
 
 function LoginPage({ onLogin }) {
-  // Estados para nombre, apellido y nombre de usuario
+  // Estados para nombre, apellido, nombre de usuario y para el mensaje
   const [nombre, setNombre] = useState('');
   const [apellido, setApellido] = useState('');
-  const [username, setUsername] = useState(''); // Cambiado de email a username
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showMessage, setShowMessage] = useState(false);
 
   const handleRegister = (e) => {
     e.preventDefault();
-    // Aquí iría la lógica para manejar la creación de un nuevo usuario
-    onLogin();
+    if (!isFormComplete()) {
+      setShowMessage(true);
+      setTimeout(() => setShowMessage(false), 7000); // El mensaje se ocultará después de 7 segundos
+    } else {
+      onLogin();
+    }
+  };
+
+  // Función para comprobar si todos los campos están llenos
+  const isFormComplete = () => {
+    return nombre && apellido && username && password;
   };
 
   return (
@@ -34,10 +44,10 @@ function LoginPage({ onLogin }) {
           />
         </div>
         <input
-          type="text" // Cambiado de type="email" a type="text"
-          placeholder="Nombre de usuario" // Cambiado de "Email" a "Nombre de usuario"
-          value={username} // Actualizado a username
-          onChange={(e) => setUsername(e.target.value)} // Actualizado a setUsername
+          type="text"
+          placeholder="Nombre de usuario"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
         />
         <input
           type="password"
@@ -47,6 +57,7 @@ function LoginPage({ onLogin }) {
         />
         <button type="submit">Register</button>
       </form>
+      {showMessage && <p style={{ color: 'red' }}>Por favor, llene todos los campos antes de registrar.</p>}
     </div>
   );
 }

@@ -1,41 +1,57 @@
-/* Sidebar.css */
+:root {
+  --primary-color: #3B5FDB; /* Azul */
+  --secondary-color: #d2cfcf; /* Blanco medio plomo (gris claro) */
+  --text-color: #000000; /* Negro para un mejor contraste */
+  --bg-color: #d2cfcf; /* Fondo secundario */
+  --highlight-color: #ffffff; /* Blanco para resaltar (si necesario) */
+}
+
 .sidebar {
-    /* Estilos generales del sidebar */
-  }
-  
-  .accordion-section {
+    background-color: var(--primary-color); /* Fondo azul para toda la barra lateral */
+    color: var(--text-color); /* Texto negro para mejor contraste */
+    padding: 20px;
+}
+
+.accordion-section {
     margin-bottom: 10px;
-  }
-  
-  .accordion-heading {
+}
+
+.accordion-heading {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: transparent;
+    background-color: var(--secondary-color); /* Fondo gris claro para cada sección */
+    color: var(--text-color); /* Texto negro para visibilidad */
     border: none;
     padding: 10px;
     width: 100%;
     text-align: left;
     cursor: pointer;
-    font-weight: bold; /* Texto en negrita para el título de la sección */
-  }
-  
-  .accordion-content {
+    font-weight: bold;
+    border-radius: 4px; /* Estilo adicional para redondear las esquinas */
+}
+
+.accordion-heading:hover {
+    background-color: var(--highlight-color); /* Cambio de color al pasar el mouse */
+}
+
+.accordion-content {
     padding: 10px;
-  }
-  
-  .filter-checkbox {
-    display: block; /* Para que cada checkbox esté en su propia línea */
-    margin: 5px 0; /* Un poco de margen para separación */
-  }
-  
-  .filter-checkbox input[type="checkbox"] {
-    margin-right: 10px; /* Espacio entre el checkbox y la etiqueta */
-  }
-  
-  .filter-range input[type="range"] {
-    width: 100%; /* Aprovecha todo el ancho disponible */
-  }
-  
-  /* Puede que necesites estilos adicionales para personalizar completamente los sliders y los checkboxes */
-  
+    background-color: var(--bg-color); /* Mantener el fondo consistente con el color secundario */
+    border-radius: 4px; /* Bordes redondeados para el contenido */
+}
+
+.filter-checkbox {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.filter-checkbox label {
+    color: var(--text-color); /* Asegurarse de que el texto de las etiquetas es negro */
+}
+
+.filter-range input[type="range"] {
+    width: 100%;
+    cursor: pointer; /* Mejora de la interactividad */
+}
