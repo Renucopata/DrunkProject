@@ -3,6 +3,7 @@ const app = express();
 const cors = require('cors'); 
 const port = 3001; 
 const authRoutes = require('./routes/jwtAuth');
+const dashboardRoutes = require('./routes/dashApis');
 const db = require('./db');
 
 //middleware
@@ -17,6 +18,7 @@ app.use(express.json());
 //routes
 
 app.use("/api/jwtAuth",authRoutes);
+//app.use("/api/dashApis", dashboardRoutes);
 
 db.connect();
 
