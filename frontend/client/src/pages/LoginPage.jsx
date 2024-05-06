@@ -1,27 +1,41 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import '../styles/LoginPage.css'; // Verifica que la ruta sea la correcta
 
 function LoginPage({ onLogin }) {
   // Estados para nombre, apellido, nombre de usuario y para el mensaje
-  const [nombre, setNombre] = useState('');
-  const [apellido, setApellido] = useState('');
+  const [first_name, setNombre] = useState('');
+  const [last_name, setApellido] = useState('');
   const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [password_hash, setPassword] = useState('');
   const [showMessage, setShowMessage] = useState(false);
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     if (!isFormComplete()) {
       setShowMessage(true);
       setTimeout(() => setShowMessage(false), 7000); // El mensaje se ocultará después de 7 segundos
     } else {
-      onLogin();
+      try {
+        const response = await axios.post('http://localhost:3001/api/jwtAuth/register', {
+          first_name,
+          last_name,
+          username,
+          password_hash
+        });
+        // Assuming the API returns some data
+        console.log(response.data); // You can handle the response data here
+        onLogin(); // Assuming this function logs the user in
+      } catch (error) {
+        console.error('Error occurred:', error);
+        // Handle error, maybe show a message to the user
+      }
     }
   };
 
   // Función para comprobar si todos los campos están llenos
   const isFormComplete = () => {
-    return nombre && apellido && username && password;
+    return first_name && last_name && username && password_hash;
   };
 
   return (
@@ -33,13 +47,13 @@ function LoginPage({ onLogin }) {
           <input
             type="text"
             placeholder="Nombre"
-            value={nombre}
+            value={first_name}
             onChange={(e) => setNombre(e.target.value)}
           />
           <input
             type="text"
             placeholder="Apellido"
-            value={apellido}
+            value={last_name}
             onChange={(e) => setApellido(e.target.value)}
           />
         </div>
@@ -52,7 +66,7 @@ function LoginPage({ onLogin }) {
         <input
           type="password"
           placeholder="Password"
-          value={password}
+          value={password_hash}
           onChange={(e) => setPassword(e.target.value)}
         />
         <button type="submit">Register</button>

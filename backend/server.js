@@ -18,7 +18,7 @@ app.use(express.json());
 //routes
 
 app.use("/api/jwtAuth",authRoutes);
-//app.use("/api/dashApis", dashboardRoutes);
+app.use("/api/dashApis", dashboardRoutes);
 
 db.connect();
 
