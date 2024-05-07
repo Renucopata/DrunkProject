@@ -1,7 +1,7 @@
 :root {
-  --primary-color: #3B5FDB; /* Azul */
+  --primary-color: #373489; /* Azul */
   --secondary-color: #d2cfcf; /* Blanco medio plomo (gris claro) */
-  --text-color: #3B5FDB; /* Azul para el texto, para contraste */
+  --text-color: #373489; /* Azul para el texto, para contraste */
   --bg-color: #d2cfcf; /* Fondo secundario */
   --highlight-color: #d2cfcf; /* Blanco para resaltar (si necesario) */
 }

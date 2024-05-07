@@ -5,6 +5,11 @@ const port = 3001;
 const authRoutes = require('./routes/jwtAuth');
 const dashboardRoutes = require('./routes/dashApis');
 const db = require('./db');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+
+//swagger
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 //middleware
 
