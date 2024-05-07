@@ -1,68 +1,66 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate instead of useHistory
+import axios from 'axios';
 import '../styles/LoginPage.css';
-import {Link} from "react-router-dom"; // Verifica que la ruta sea la correcta
 
 function RegisterPage({ onRegistration }) {
-    // Estados para nombre, apellido, nombre de usuario y para el mensaje
-    const [nombre, setNombre] = useState('');
-    const [apellido, setApellido] = useState('');
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [showMessage, setShowMessage] = useState(false);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [username, setUsername] = useState('');
+  const [passwordHash, setPasswordHash] = useState('');
+  const [showMessage, setShowMessage] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
+  const navigate = useNavigate(); // Initialize useNavigate
 
-    const handleRegistration = (e) => {
-        e.preventDefault();
-        if (!isFormComplete()) {
-            setShowMessage(true);
-            setTimeout(() => setShowMessage(false), 7000); // El mensaje se ocultará después de 7 segundos
-        } else {
-            onRegistration();
-        }
-    };
+  const handleRegistration = async (e) => {
+    e.preventDefault();
+    if (!isFormComplete()) {
+      setShowMessage(true);
+      setTimeout(() => setShowMessage(false), 7000);
+    } else {
+      try {
+        const response = await axios.post('http://localhost:3001/api/jwtAuth/register', {
+          first_name: firstName,
+          last_name: lastName,
+          username,
+          password_hash: passwordHash,
+        });
+        console.log(response.data);
+        setSuccessMessage('Registro exitoso. Serás redirigido al inicio de sesión.');
+        setTimeout(() => {
+          setSuccessMessage('');
+          navigate('/login'); // Use navigate instead of history.push
+        }, 3000);
+      } catch (error) {
+        console.error('Error occurred:', error);
+      }
+    }
+  };
 
-    // Función para comprobar si todos los campos están llenos
-    const isFormComplete = () => {
-        return nombre && apellido && username && password;
-    };
+  const isFormComplete = () => {
+    return firstName && lastName && username && passwordHash;
+  };
 
-    return (
-        <div className="register-container">
-            <div className="logo">Logo</div>
-            {/* Reemplaza esto por tu logo */}
-            <h1>Ingresa tus datos</h1>
-            <form onSubmit={handleRegistration}>
-                <div>
-                    <input
-                        type="text"
-                        placeholder="Nombre"
-                        value={nombre}
-                        onChange={(e) => setNombre(e.target.value)}
-                    />
-                    <input
-                        type="text"
-                        placeholder="Apellido"
-                        value={apellido}
-                        onChange={(e) => setApellido(e.target.value)}
-                    />
-                </div>
-                <input
-                    type="text"
-                    placeholder="Nombre de usuario"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <button type="submit">Registrarse</button>
-            </form>
-            {showMessage && <p style={{color: 'red'}}>Por favor, llene todos los campos antes de registrar.</p>}
-            <p>¿Ya tienes una cuenta? <Link to="/login">Entra aquí</Link></p>
+  return (
+    <div className="register-container">
+      <div className="logo">Logo</div>
+      <h1>Ingresa tus datos</h1>
+      <form onSubmit={handleRegistration}>
+        <div>
+          <input type="text" placeholder="Nombre" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+          <input type="text" placeholder="Apellido" value={lastName} onChange={(e) => setLastName(e.target.value)} />
         </div>
-    );
+        <input type="text" placeholder="Nombre de usuario" value={username} onChange={(e) => setUsername(e.target.value)} />
+        <input type="password" placeholder="Password" value={passwordHash} onChange={(e) => setPasswordHash(e.target.value)} />
+        <button type="submit">Registrarse</button>
+      </form>
+      {showMessage && <p style={{ color: 'red' }}>Por favor, llene todos los campos antes de registrar.</p>}
+      {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
+      <p>
+        ¿Ya tienes una cuenta? <Link to="/login">Entra aquí</Link>
+      </p>
+    </div>
+  );
 }
 
 export default RegisterPage;

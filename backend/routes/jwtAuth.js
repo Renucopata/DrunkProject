@@ -3,11 +3,6 @@ const router = express.Router();
 
 const db = require('../db');
 
-//const jwtGenerator = require("../utils/jwtGenerator");
-//const authorize = require("../middleware/authorize");
-
-//authorizeentication
-
 router.post("/register", async (req, res) => {
   const { username, first_name, last_name, password_hash } = req.body;
 
