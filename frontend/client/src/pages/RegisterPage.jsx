@@ -44,7 +44,7 @@ function RegisterPage({ onRegistration }) {
   return (
     <div className="register-container">
       <div className="logo">LP Acquisitions</div>
-      <h1>Ingresa tus datos</h1>
+      <h1>Ingresa los datos</h1>
       <form onSubmit={handleRegistration}>
         <div>
           <input type="text" placeholder="Nombre" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
@@ -52,12 +52,12 @@ function RegisterPage({ onRegistration }) {
         </div>
         <input type="text" placeholder="Nombre de usuario" value={username} onChange={(e) => setUsername(e.target.value)} />
         <input type="password" placeholder="Password" value={passwordHash} onChange={(e) => setPasswordHash(e.target.value)} />
-        <button type="submit">Registrarse</button>
+        <button type="submit">Registrar usuario</button>
       </form>
       {showMessage && <p style={{ color: 'red' }}>Por favor, llene todos los campos antes de registrar.</p>}
       {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
       <p>
-        ¿Ya tienes una cuenta? <Link to="/login">Entra aquí</Link>
+        <Link to="/">Volver</Link>
       </p>
     </div>
   );

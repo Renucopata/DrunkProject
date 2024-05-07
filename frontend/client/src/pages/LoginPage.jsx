@@ -22,7 +22,9 @@ function LoginPage({ onLogin }) {
                 password_hash
             });
             // Assuming the API returns some data
-            console.log(response.data); // You can handle the response data here
+            const user = response.data.username;
+            console.log(user); 
+            localStorage.setItem("usertype",user)// You can handle the response data here
             onLogin(username); // Assuming this function logs the user in
         } catch (error) {
             console.error('Error occurred:', error);
@@ -55,7 +57,7 @@ function LoginPage({ onLogin }) {
                 <button type="submit">Ingresar</button>
             </form>
             {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-            <p>¿No tienes una cuenta? <Link to="/registro">Regístrate aquí</Link></p>
+            
         </div>
     );
 }
