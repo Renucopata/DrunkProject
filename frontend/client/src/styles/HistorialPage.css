@@ -21,7 +21,7 @@ th {
 
 button {
     padding: 5px 10px;
-    background-color: #4CAF50; /* Verde */
+    background-color: #373489; /* Verde */
     color: white;
     border: none;
     border-radius: 4px;
@@ -29,5 +29,22 @@ button {
 }
 
 button:hover {
-    background-color: #45a049; /* Verde oscuro */
+    background-color: #373489; /* Verde oscuro */
+}
+
+/* Estilos para el botón de regreso al Dashboard */
+.btn-back {
+    display: inline-block;
+    background-color: #373489; /* Verde */
+    color: white;
+    padding: 8px 16px;
+    margin-bottom: 20px;
+    text-decoration: none; /* Remueve el subrayado típico de los enlaces */
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.btn-back:hover {
+    background-color: #373489; /* Verde oscuro */
 }
