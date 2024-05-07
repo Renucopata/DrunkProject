@@ -49,7 +49,7 @@ const ConvocatoriaPage = () => {
           <div>
             <Link to="/" className="return-dashboard-btn">Regresar al Dashboard</Link>
             <button type="button" onClick={() => setShowModal(true)}
-                    className="add-convocatoria-btn">Añadoir Convocatoria
+                    className="add-convocatoria-btn">Añadir Convocatoria
             </button>
           </div>
         </div>
