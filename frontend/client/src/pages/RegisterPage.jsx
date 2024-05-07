@@ -43,7 +43,7 @@ function RegisterPage({ onRegistration }) {
 
   return (
     <div className="register-container">
-      <div className="logo">Logo</div>
+      <div className="logo">LP Acquisitions</div>
       <h1>Ingresa tus datos</h1>
       <form onSubmit={handleRegistration}>
         <div>

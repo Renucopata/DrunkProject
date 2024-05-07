@@ -37,7 +37,7 @@ function LoginPage({ onLogin }) {
 
     return (
         <div className="register-container">
-            <div className="logo">Logo</div> {/* Reemplaza esto por tu logo */}
+            <div className="logo">LP Acquisitions</div> {/* Reemplaza esto por tu logo */}
             <h1>Ingresa tus datos</h1>
             <form onSubmit={handleLogin}>
                 <input

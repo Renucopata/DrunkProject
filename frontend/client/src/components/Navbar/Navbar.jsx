@@ -17,7 +17,7 @@ const Navbar = ({ onSearch }) => {
 
   return (
     <nav className="navbar">
-      <div className="logo">Logo</div>
+      <div className="logo">LP Acquisitions</div>
       <div className="search-bar">
         <form onSubmit={handleSearchSubmit}>
           <input
