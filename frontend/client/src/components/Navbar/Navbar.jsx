@@ -14,7 +14,7 @@ const Navbar = ({ onSearch }) => {
     event.preventDefault();
     onSearch(searchTerm);  // Llama a la función onSearch con el término actual
   };
-
+  console.log(localStorage.getItem("usertype"));
   return (
     <nav className="navbar">
       <div className="logo">LP Acquisitions</div>
@@ -32,8 +32,22 @@ const Navbar = ({ onSearch }) => {
         </form>
       </div>
       <div className="navbar-links">
-        <Link to="/historial">Historial</Link> {/* Cambiado para apuntar a la ruta de HistorialPage */}
+        {
+          localStorage.getItem("usertype") === "admin" ? (
+            <>
+            <Link to="/historial">Historial</Link>
         <Link to="/convocatoria">Convocatorias</Link>
+            </>
+            
+          ):(<>
+          <Link to="/convocatoria">Convocatorias</Link>
+          </>
+
+          )
+
+
+        }
+        
       </div>
     </nav>
   );
