@@ -4,6 +4,7 @@ const cors = require('cors');
 const port = 3001; 
 const authRoutes = require('./routes/jwtAuth');
 const dashboardRoutes = require('./routes/dashApis');
+const convoRoutes = require('./routes/convoApis');
 const db = require('./db');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
@@ -22,8 +23,9 @@ app.use(express.json());
 
 //routes
 
-app.use("/api/jwtAuth",authRoutes);
+app.use("/api/jwtAuth", authRoutes);
 app.use("/api/dashApis", dashboardRoutes);
+app.use("/api/convoApis", convoRoutes)
 
 db.connect();
 
