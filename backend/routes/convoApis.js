@@ -6,13 +6,13 @@ const db = require("../db");
 
 // Create API
 router.post("/addConvocatoria", async (req, res) => {
-  const { requerimiento, fecha_apertura, fecha_cierre, estado, categoria } = req.body;
-  const owner = localStorage.getItem("usertype");
+  const { requerimiento, fecha_apertura, fecha_cierre, estado, owner,categoria } = req.body;
+  //const owner = localStorage.getItem("usertype");
 
   try {
     const insertQuery = 'INSERT INTO convocatorias (requerimiento, fecha_apertura, fecha_cierre, estado, owner, categoria) VALUES ($1, $2, $3, $4, $5, $6)';
     await db.query(insertQuery, [requerimiento, fecha_apertura, fecha_cierre, estado, owner, categoria]);
-    res.json({ message: "Convocatoria created successfully" });
+    res.status(201).json({ message: "Convocatoria created successfully" });
   } catch (err) {
     console.error(err.message);
     res.status(500).json({ error: "Internal server error" });

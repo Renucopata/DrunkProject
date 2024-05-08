@@ -42,18 +42,18 @@ const ConvocatoriaPage = () => {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:3001/api/convoApis/addConvocatoria', {
-        requerimiento: '',
-    fecha_apertura: '',
-    fecha_cierre: '',
-    estado: '',
-    owner: '',
-    postulante_elegido: 'ninguno',
-    categoria: '' 
+        requerimiento: newConvocatoriaData.requerimiento,
+        fecha_apertura: newConvocatoriaData.fecha_apertura,
+        fecha_cierre: newConvocatoriaData.fecha_cierre,
+        estado: newConvocatoriaData.estado,
+        owner: newConvocatoriaData.owner,
+        postulante_elegido: newConvocatoriaData.postulante_elegido,
+        categoria: newConvocatoriaData.categoria
       });
-      if (!response.ok) {
+      if (response.status !== 201) {  //BUG!!! it always throw error
         throw new Error('Failed to add convocatoria');
       }
-      const newConvocatoria = await response.json();
+      const newConvocatoria = response.data; // Assuming the response contains the newly added convocatoria
       setConvocatorias([...convocatorias, newConvocatoria]);
       setShowModal(false);
       setNewConvocatoriaData({
@@ -68,6 +68,7 @@ const ConvocatoriaPage = () => {
     } catch (error) {
       console.error('Error adding convocatoria:', error);
     }
+    window.location.reload();
   };
 
   return (
@@ -84,7 +85,7 @@ const ConvocatoriaPage = () => {
           <div className="modal-content">
             <h2>Añadir Nueva Convocatoria</h2>
             <form onSubmit={handleSubmit}>
-              <input type="text" name="requirement" placeholder="Requerimiento" value={newConvocatoriaData.requirement} onChange={handleInputChange} />
+              <input type="text" name="requerimiento" placeholder="Requerimiento" value={newConvocatoriaData.requerimiento} onChange={handleInputChange} />
               <input type="date" name="fecha_apertura" placeholder="Fecha de Apertura" value={newConvocatoriaData.fecha_apertura} onChange={handleInputChange} />
               <input type="date" name="fecha_cierre" placeholder="Fecha de Cierre" value={newConvocatoriaData.fecha_cierre} onChange={handleInputChange} />
               <input type="text" name="estado" placeholder="Estado" value={newConvocatoriaData.estado} onChange={handleInputChange} />
