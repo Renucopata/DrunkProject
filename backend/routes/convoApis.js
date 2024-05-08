@@ -50,14 +50,14 @@ router.get("/convocatorias/:id", async (req, res) => {
 });
 
 // Update API
-router.put("/convocatorias/:id", async (req, res) => {
+router.put("/updateConvocatoria/:id", async (req, res) => {
   const id = req.params.id;
   const { requerimiento, fecha_apertura, fecha_cierre, estado, owner, categoria } = req.body;
 
   try {
     const updateQuery = 'UPDATE convocatorias SET requerimiento = $1, fecha_apertura = $2, fecha_cierre = $3, estado = $4, owner = $5, categoria = $6 WHERE id = $7';
     await db.query(updateQuery, [requerimiento, fecha_apertura, fecha_cierre, estado, owner, categoria, id]);
-    res.json({ message: "Convocatoria updated successfully" });
+    res.status(201).json({ message: "Convocatoria updated successfully" });
   } catch (err) {
     console.error(err.message);
     res.status(500).json({ error: "Internal server error" });
@@ -65,13 +65,13 @@ router.put("/convocatorias/:id", async (req, res) => {
 });
 
 // Delete API
-router.delete("/convocatorias/:id", async (req, res) => {
+router.delete("/deleteConvocatoria/:id", async (req, res) => {
   const id = req.params.id;
 
   try {
     const deleteQuery = "DELETE FROM convocatorias WHERE id = $1";
     await db.query(deleteQuery, [id]);
-    res.json({ message: "Convocatoria deleted successfully" });
+    res.status(201).json({ message: "Convocatoria deleted successfully" });
   } catch (err) {
     console.error(err.message);
     res.status(500).json({ error: "Internal server error" });
