@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Importar Link desde react-router-dom
+//import { Link } from 'react-router-dom'; // Importar Link desde react-router-dom
 import axios from 'axios';
 import '../styles/LoginPage.css'; // Verifica que la ruta sea la correcta
 
