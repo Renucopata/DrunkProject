@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import UpdateModal from '../UpdateModal';// Import the UpdateModal component
-import DeleteModal from '../DeleteModal'; // Import the DeleteModal component
+import UpdateModal from '../UpdateModal';
+import DeleteModal from '../DeleteModal';
 
 const ProductTable = ({ convocatorias }) => {
     const [showUpdateModal, setShowUpdateModal] = useState(false);

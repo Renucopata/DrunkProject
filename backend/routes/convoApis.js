@@ -78,4 +78,22 @@ router.delete("/deleteConvocatoria/:id", async (req, res) => {
   }
 });
 
+router.get("/category-companies/:category", async (req, res) => {
+  const category = req.params.category;
+
+  try {
+    // Retrieve all companies that sell products in the specified category
+    const selectQuery = `SELECT * FROM companies WHERE id IN (
+      SELECT company_id FROM products WHERE category = $1
+    )`;
+    const result = await db.query(selectQuery, [category]);
+
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+
 module.exports = router;

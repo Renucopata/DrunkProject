@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ProductTable from '../components/ProductTable/ProductTable';
+import EmailsSend from '../components/EmailsSend';
 import '../styles/ConvocatoriaPage.css';
 import axios from 'axios';
 
 const ConvocatoriaPage = () => {
   const [convocatorias, setConvocatorias] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [showInfoModal, setShowInfoModal] = useState(false);
+  const [category, setCategory] = useState('');
   const [newConvocatoriaData, setNewConvocatoriaData] = useState({
     requerimiento: '',
     fecha_apertura: '',
@@ -37,7 +40,20 @@ const ConvocatoriaPage = () => {
   const handleInputChange = (e) => {
     setNewConvocatoriaData({ ...newConvocatoriaData, [e.target.name]: e.target.value });
   };
-
+  const modalStyle = {
+    position: 'fixed',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    maxWidth: '80%',
+    maxHeight: '80%',
+    overflow: 'auto',
+    backgroundColor: '#fff',
+    padding: '20px',
+    borderRadius: '8px',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+  };
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -50,12 +66,15 @@ const ConvocatoriaPage = () => {
         postulante_elegido: newConvocatoriaData.postulante_elegido,
         categoria: newConvocatoriaData.categoria
       });
-      if (response.status !== 201) {  //BUG!!! it always throw error
+      //console.log(newConvocatoria.categoria);
+      if (response.status !== 201) {
         throw new Error('Failed to add convocatoria');
       }
       const newConvocatoria = response.data; // Assuming the response contains the newly added convocatoria
       setConvocatorias([...convocatorias, newConvocatoria]);
       setShowModal(false);
+      setCategory('Papelería');
+      setShowInfoModal(true);
       setNewConvocatoriaData({
         requerimiento: '',
         fecha_apertura: '',
@@ -68,7 +87,6 @@ const ConvocatoriaPage = () => {
     } catch (error) {
       console.error('Error adding convocatoria:', error);
     }
-    window.location.reload();
   };
 
   return (
@@ -97,6 +115,14 @@ const ConvocatoriaPage = () => {
           </div>
         </div>
       )}
+      {showInfoModal && (
+        <div className="modal" style={modalStyle}>
+        <div className="modal-content" style={modalStyle}>
+            <EmailsSend category={category}/>
+            <button onClick={() => setShowInfoModal(false)}>Cerrar</button>
+          </div>
+        </div>
+      )}
       <div>
         <ProductTable convocatorias={convocatorias} />
       </div>
@@ -105,3 +131,4 @@ const ConvocatoriaPage = () => {
 };
 
 export default ConvocatoriaPage;
+
