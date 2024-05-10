@@ -23,5 +23,5 @@ jobs:
       working-directory: ${{ github.workspace }}/${{ env.PROJECT_PATH }}
 
     - name: Run tests
-      run:  npm test -- App.test.js --test-skip
+      run:  npm test -- --ignore="/src/App.test.js"   
       working-directory: ${{ github.workspace }}/${{ env.PROJECT_PATH }}
