@@ -39,6 +39,7 @@ const ConvocatoriaPage = () => {
 
   const handleInputChange = (e) => {
     setNewConvocatoriaData({ ...newConvocatoriaData, [e.target.name]: e.target.value });
+    
   };
   const modalStyle = {
     position: 'fixed',
@@ -57,23 +58,27 @@ const ConvocatoriaPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log(newConvocatoriaData.categoria);
+      setCategory(newConvocatoriaData.categoria);
       const response = await axios.post('http://localhost:3001/api/convoApis/addConvocatoria', {
         requerimiento: newConvocatoriaData.requerimiento,
         fecha_apertura: newConvocatoriaData.fecha_apertura,
         fecha_cierre: newConvocatoriaData.fecha_cierre,
         estado: newConvocatoriaData.estado,
-        owner: newConvocatoriaData.owner,
+        owner: localStorage.getItem("usertype"),
         postulante_elegido: newConvocatoriaData.postulante_elegido,
         categoria: newConvocatoriaData.categoria
       });
-      //console.log(newConvocatoria.categoria);
+      
+      //console.log(category);
       if (response.status !== 201) {
         throw new Error('Failed to add convocatoria');
       }
       const newConvocatoria = response.data; // Assuming the response contains the newly added convocatoria
       setConvocatorias([...convocatorias, newConvocatoria]);
       setShowModal(false);
-      setCategory('Papelería');
+      //console.log(category);
+      //setCategory('Papelería');
       setShowInfoModal(true);
       setNewConvocatoriaData({
         requerimiento: '',
@@ -107,7 +112,7 @@ const ConvocatoriaPage = () => {
               <input type="date" name="fecha_apertura" placeholder="Fecha de Apertura" value={newConvocatoriaData.fecha_apertura} onChange={handleInputChange} />
               <input type="date" name="fecha_cierre" placeholder="Fecha de Cierre" value={newConvocatoriaData.fecha_cierre} onChange={handleInputChange} />
               <input type="text" name="estado" placeholder="Estado" value={newConvocatoriaData.estado} onChange={handleInputChange} />
-              <input type="text" name="owner" placeholder="Owner" value={newConvocatoriaData.owner} onChange={handleInputChange} />
+              
               <input type="text" name="categoria" placeholder="Categoria" value={newConvocatoriaData.categoria} onChange={handleInputChange} />
               <button type="submit">Guardar Convocatoria</button>
               <button onClick={() => setShowModal(false)}>Cerrar</button>

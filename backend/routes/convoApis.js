@@ -32,12 +32,12 @@ router.get("/getConvocatorias", async (req, res) => {
 });
 
 // Read by ID API
-router.get("/convocatorias/:id", async (req, res) => {
-  const id = req.params.id;
+router.get("/convocatorias/:owner", async (req, res) => {
+  const owner = req.params.owner;
 
   try {
-    const selectQuery = "SELECT * FROM convocatorias WHERE id = $1";
-    const result = await db.query(selectQuery, [id]);
+    const selectQuery = "SELECT * FROM convocatorias WHERE owner = $1";
+    const result = await db.query(selectQuery, [owner]);
     if (result.rows.length === 0) {
       res.status(404).json({ error: "Convocatoria not found" });
     } else {
@@ -52,11 +52,11 @@ router.get("/convocatorias/:id", async (req, res) => {
 // Update API
 router.put("/updateConvocatoria/:id", async (req, res) => {
   const id = req.params.id;
-  const { requerimiento, fecha_apertura, fecha_cierre, estado, owner, categoria } = req.body;
+  const { requerimiento, fecha_apertura, fecha_cierre, estado, owner, postulante_elegido, categoria } = req.body;
 
   try {
-    const updateQuery = 'UPDATE convocatorias SET requerimiento = $1, fecha_apertura = $2, fecha_cierre = $3, estado = $4, owner = $5, categoria = $6 WHERE id = $7';
-    await db.query(updateQuery, [requerimiento, fecha_apertura, fecha_cierre, estado, owner, categoria, id]);
+    const updateQuery = 'UPDATE convocatorias SET requerimiento = $1, fecha_apertura = $2, fecha_cierre = $3, estado = $4, owner = $5, postulante_elegido = $6, categoria = $7 WHERE id = $8';
+    await db.query(updateQuery, [requerimiento, fecha_apertura, fecha_cierre, estado, owner, postulante_elegido,categoria, id]);
     res.status(201).json({ message: "Convocatoria updated successfully" });
   } catch (err) {
     console.error(err.message);

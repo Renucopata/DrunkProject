@@ -44,6 +44,7 @@ const UpdateModal = ({ convocatoriaId, closeModal }) => {
                     <input type="date" name="fecha_cierre" placeholder="Fecha de Cierre" value={updatedData.fecha_cierre} onChange={handleInputChange} />
                     <input type="text" name="estado" placeholder="Estado" value={updatedData.estado} onChange={handleInputChange} />
                     <input type="text" name="owner" placeholder="Owner" value={updatedData.owner} onChange={handleInputChange} />
+                    <input type="text" name="postulante_elegido" placeholder="Postulante Elegido" value={updatedData.postulante_elegido} onChange={handleInputChange} />
                     <input type="text" name="categoria" placeholder="Categoria" value={updatedData.categoria} onChange={handleInputChange} />
                     {/* Button to submit the update */}
                     <button type="submit">Guardar Cambios</button>
