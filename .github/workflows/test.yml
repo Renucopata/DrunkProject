@@ -17,6 +17,10 @@ jobs:
       with:
         ref: dev  # Checkout the dev branch
         path: frontend/client
+    - name: Check directory
+      run: |
+        pwd
+        ls -la
     - name: Install dependencies
       run: cd frontend/client && npm install
 
