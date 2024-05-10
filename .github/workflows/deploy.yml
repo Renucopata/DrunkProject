@@ -7,15 +7,16 @@ on:
   workflow_dispatch:  # Manually trigger the workflow
 
 jobs:
-  deploy:
+  deploy_services:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Deploy Frontend
       - uses: JorgeLNJunior/render-deploy@v1.4.4
         with:
           service_id: srv-courlb8l6cac73b9oq9g
           api_key: rnd_HFNv4gEpeHFphaRJAKEQZiduMB5v
-      - uses: actions/checkout@v3
+      - name: Deploy Frontend
       - uses: JorgeLNJunior/render-deploy@v1.4.4
         with:
           service_id: srv-cout40nsc6pc73aqobpg
