@@ -17,10 +17,8 @@ jobs:
       with:
         ref: dev  # Checkout the dev branch
         path: frontend/client
-    - name: Change directory to frontend/client
-      run: cd frontend/client
     - name: Install dependencies
-      run: npm install
+      run: cd frontend/client && npm install
 
     - name: Run tests
-      run: npm test
+      run: cd frontend/client && npm test
