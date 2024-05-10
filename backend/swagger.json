@@ -1,47 +1,378 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Your API Documentation",
+    "title": "Enterprise API",
     "version": "1.0.0",
-    "description": "This is the description of your API."
+    "description": "Documentación API para tu plataforma empresarial."
   },
+  "tags": [
+    {
+      "name": "jwtAuth",
+      "description": "Endpoints relacionados con autenticación"
+    },
+    {
+      "name": "Convocatorias",
+      "description": "Endpoints relacionados con Convocatorias"
+    },
+    {
+      "name": "Dashboard",
+      "description": "Endpoints relacionados con Dashboard"
+    }
+  ],
   "paths": {
-    "/users": {
-      "get": {
-        "summary": "Get all users",
-        "responses": {
-          "200": {
-            "description": "A list of users"
-          }
-        }
-      },
+    "/api/jwtAuth/register": {
       "post": {
-        "summary": "Create a new user",
+        "summary": "Registrar nuevo usuario",
+        "tags": ["jwtAuth"],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/User"
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "example": "john_doe"
+                  },
+                  "first_name": {
+                    "type": "string",
+                    "example": "John"
+                  },
+                  "last_name": {
+                    "type": "string",
+                    "example": "Doe"
+                  },
+                  "password_hash": {
+                    "type": "string",
+                    "example": "hashedPassword123"
+                  }
+                },
+                "required": ["username", "first_name", "last_name", "password_hash"]
               }
             }
           }
         },
         "responses": {
           "201": {
-            "description": "User created"
+            "description": "User added to the database."
+          },
+          "401": {
+            "description": "User already exists."
+          },
+          "500": {
+            "description": "Internal server error."
           }
         }
       }
     },
-    "/users/{id}": {
+    "/api/jwtAuth/login": {
+      "post": {
+        "summary": "Login con username y password",
+        "tags": ["jwtAuth"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "example": "john_doe"
+                  },
+                  "password_hash": {
+                    "type": "string",
+                    "example": "hashedPassword123"
+                  }
+                },
+                "required": ["username", "password_hash"]
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "200": {
+            "description": "Login successful.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Login successful."
+                    },
+                    "username": {
+                      "type": "string",
+                      "example": "john_doe"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Incorrect user or password."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        }
+      }
+    },
+    "/api/convoApis/addConvocatoria": {
+      "post": {
+        "summary": "Crear nueva convocatoria",
+        "tags": ["Convocatorias"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "requerimiento": {
+                    "type": "string",
+                    "example": "Some requirement"
+                  },
+                  "fecha_apertura": {
+                    "type": "string",
+                    "example": "2024-05-10"
+                  },
+                  "fecha_cierre": {
+                    "type": "string",
+                    "example": "2024-06-10"
+                  },
+                  "estado": {
+                    "type": "string",
+                    "example": "open"
+                  },
+                  "owner": {
+                    "type": "string",
+                    "example": "john_doe"
+                  },
+                  "categoria": {
+                    "type": "string",
+                    "example": "some_category"
+                  }
+                },
+                "required": ["requerimiento", "fecha_apertura", "fecha_cierre", "estado", "owner", "categoria"]
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "201": {
+            "description": "Convocatoria created successfully"
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        }
+      }
+    },
+    "/api/convoApis/getConvocatorias": {
       "get": {
-        "summary": "Get a user by ID",
+        "summary": "Listar convocatorias",
+        "tags": ["Convocatorias"],
+        "responses": {
+          "200": {
+            "description": "A list of convocatorias"
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        }
+      }
+    },
+    "/api/convoApis/convocatorias/{owner}": {
+      "get": {
+        "summary": "Conseguir convocatoria por dueño",
+        "tags": ["Convocatorias"],
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "path",
+            "description": "Owner of the convocatoria to retrieve",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "john_doe"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Convocatoria found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": 1,
+                  "requerimiento": "Requirement 1",
+                  "fecha_apertura": "2024-05-10",
+                  "fecha_cierre": "2024-06-10",
+                  "estado": "open",
+                  "owner": "john_doe",
+                  "postulante_elegido": "selected_candidate",
+                  "categoria": "category"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Convocatoria not found"
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        }
+      }
+    },
+    "/api/convoApis/updateConvocatoria/{id}": {
+      "put": {
+        "summary": "Actualizar convocatoria por ID",
+        "tags": ["Convocatorias"],
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "ID of the user to retrieve",
+            "description": "ID of the convocatoria to update",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "requerimiento": {
+                    "type": "string",
+                    "example": "Updated requirement"
+                  },
+                  "fecha_apertura": {
+                    "type": "string",
+                    "example": "2024-05-10"
+                  },
+                  "fecha_cierre": {
+                    "type": "string",
+                    "example": "2024-06-10"
+                  },
+                  "estado": {
+                    "type": "string",
+                    "example": "closed"
+                  },
+                  "owner": {
+                    "type": "string",
+                    "example": "jane_doe"
+                  },
+                  "postulante_elegido": {
+                    "type": "string",
+                    "example": "selected_candidate"
+                  },
+                  "categoria": {
+                    "type": "string",
+                    "example": "updated_category"
+                  }
+                },
+                "required": ["requerimiento", "fecha_apertura", "fecha_cierre", "estado", "owner", "postulante_elegido", "categoria"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Convocatoria updated successfully"
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        }
+      }
+    },
+    "/api/convoApis/deleteConvocatoria/{id}": {
+      "delete": {
+        "summary": "Eliminar convocatoria por ID",
+        "tags": ["Convocatorias"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the convocatoria to delete",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Convocatoria deleted successfully"
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        }
+      }
+    },
+    "/api/convoApis/category-companies/{category}": {
+      "get": {
+        "summary": "Listar compañias por caterogía",
+        "tags": ["Convocatorias"],
+        "parameters": [
+          {
+            "name": "category",
+            "in": "path",
+            "description": "Categoría a buscar",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "Papelería"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Listado de compañias encontradas"
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        }
+      }
+    },
+    "/api/dashApis/products": {
+      "get": {
+        "summary": "Listar todos los productos",
+        "tags": ["Dashboard"],
+        "responses": {
+          "200": {
+            "description": "A list of products"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/dashApis/products/{id}": {
+      "get": {
+        "summary": "Conseguir producto por ID",
+        "tags": ["Dashboard"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID del producto a buscar",
             "required": true,
             "schema": {
               "type": "integer"
@@ -50,34 +381,55 @@
         ],
         "responses": {
           "200": {
-            "description": "User found"
+            "description": "Product found"
           },
           "404": {
-            "description": "User not found"
+            "description": "Product not found"
+          },
+          "500": {
+            "description": "Internal server error"
           }
         }
       }
-    }
-  },
-  "components": {
-    "schemas": {
-      "User": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer"
+    },
+    "/api/dashApis/companies": {
+      "get": {
+        "summary": "Listar todas las compañias",
+        "tags": ["Dashboard"],
+        "responses": {
+          "200": {
+            "description": "Lista de compañias"
           },
-          "username": {
-            "type": "string"
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/dashApis/companies/{id}": {
+      "get": {
+        "summary": "Conseguir compañia por ID",
+        "tags": ["Dashboard"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the company to retrieve",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Company found"
           },
-          "first_name": {
-            "type": "string"
+          "404": {
+            "description": "Company not found"
           },
-          "last_name": {
-            "type": "string"
-          },
-          "password_hash": {
-            "type": "string"
+          "500": {
+            "description": "Internal server error"
           }
         }
       }
