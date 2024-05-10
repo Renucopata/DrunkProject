@@ -17,6 +17,7 @@ jobs:
       with:
         ref: dev  # Checkout the dev branch
         path: frontend/client
+        fetch-depth: 0
     - name: Change permissions
       run: chmod -R 777 frontend/client
     - name: Install dependencies
