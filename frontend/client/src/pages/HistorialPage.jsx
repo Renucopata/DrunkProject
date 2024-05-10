@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import ProductTable from '../components/ProductTable/ProductTable';
 import '../styles/ConvocatoriaPage.css';
 import axios from 'axios';
+import ProductTableHisto from '../components/ProductTable/ProductTableHisto';
 
 const HistorialPage = () => {
   const [convocatorias, setConvocatorias] = useState([]);
@@ -74,7 +75,7 @@ const HistorialPage = () => {
   return (
     <div className="convocatoria-page">
       <div className="convocatoria-header">
-        <h1>Convocatorias</h1>
+        <h1>Historial</h1>
         <div>
           <Link to="/" className="return-dashboard-btn">Regresar al Dashboard</Link>
           <button type="button" onClick={() => setShowModal(true)} className="add-convocatoria-btn">Añadir Convocatoria</button>
@@ -98,7 +99,7 @@ const HistorialPage = () => {
         </div>
       )}
       <div>
-        <ProductTable convocatorias={convocatorias} />
+        <ProductTableHisto convocatorias={convocatorias} />
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import UpdateModal from '../UpdateModal';
 import DeleteModal from '../DeleteModal';
 
-const ProductTable = ({ convocatorias }) => {
+const ProductTableHisto = ({ convocatorias }) => {
     const [showUpdateModal, setShowUpdateModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [selectedConvocatoriaId, setSelectedConvocatoriaId] = useState(null);
@@ -54,12 +54,12 @@ const ProductTable = ({ convocatorias }) => {
                             <td>{convocatoria.categoria}</td>
                             <td>
                                 {/* Update and Delete buttons */}
-                                {localStorage.getItem('usertype') === convocatoria.owner && (
-                                    <>
+                               
+                                    
                                         <button onClick={() => handleUpdate(convocatoria.id)}>Actualizar</button>
                                         <button onClick={() => handleDelete(convocatoria.id)}>Eliminar</button>
-                                    </>
-  )}
+                                    
+  
                             </td>
                         </tr>
                     ))}
@@ -85,4 +85,4 @@ const ProductTable = ({ convocatorias }) => {
     );
 };
 
-export default ProductTable;
+export default ProductTableHisto;
