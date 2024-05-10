@@ -18,7 +18,7 @@ jobs:
         ref: dev  # Checkout the dev branch
         path: frontend/client
     - name: Check directory
-      run: cd frontend/client && |
+      run: cd frontend/client |
         pwd
         ls -la
     - name: Install dependencies
