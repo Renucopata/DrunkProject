@@ -1,0 +1,17 @@
+name: Deploy Backend on Render
+
+on:
+  push:
+    branches:
+      - dev
+  workflow_dispatch:  # Manually trigger the workflow
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: JorgeLNJunior/render-deploy@v1.4.4
+        with:
+          service_id: srv-cout40nsc6pc73aqobpg
+          api_key: rnd_uj3ATcBH9HpMxHkwDYamyWgP9trQ
