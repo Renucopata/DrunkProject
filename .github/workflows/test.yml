@@ -17,6 +17,9 @@ jobs:
       with:
         ref: dev  # Checkout the dev branch
 
+    - name: Debug Directory Structure
+      run: ls -la
+
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
@@ -24,6 +27,9 @@ jobs:
 
     - name: Change directory to frontend/client
       run: cd frontend/client
+
+    - name: Debug Package.json Contents
+      run: cat package.json
 
     - name: Install dependencies
       run: npm install
