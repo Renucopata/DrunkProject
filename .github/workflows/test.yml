@@ -29,7 +29,7 @@ jobs:
       run: cd frontend/client
 
     - name: Debug Package.json Contents
-      run: cat package.json
+      run: cat package.json || echo "No package.json found"
 
     - name: Install dependencies
       run: npm install
