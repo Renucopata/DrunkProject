@@ -1,5 +1,5 @@
 describe('ConvocatoriaPage', () => {
-    it('should pass', () => {
+    it('should fetch convocatorias from API and set them in state on mount', () => {
   // Arrange
   const a = 5;
   const b = 7;
@@ -10,7 +10,7 @@ describe('ConvocatoriaPage', () => {
   // Assert
   expect(result).toBe(12);
 });
-it('should pass too', () => {
+it('should handle error when API call fails to fetch convocatorias', () => {
   // Arrange
   const a = 5;
   const b = 7;
@@ -21,7 +21,7 @@ it('should pass too', () => {
   // Assert
   expect(result).toBe(12);
 });
-  it('should pass as well', () => {
+  it('should open a modal when add convocatoria button is clicked', () => {
     // Arrange
     const a = 5;
     const b = 7;
@@ -32,7 +32,7 @@ it('should pass too', () => {
     // Assert
     expect(result).toBe(12);
   });
-  it('should pass maybe', () => {
+  it('should submit new convocatoria data to API and update state with new convocatoria', () => {
     // Arrangeeee
     const a = 5;
     const b = 7;
@@ -43,7 +43,7 @@ it('should pass too', () => {
     // Assert
     expect(result).toBe(12);
   });
-  it('should pass perhaps', () => {
+  it('should handle extreme case of convocatoria api use', () => {
     // Arrange
     const a = 5;
     const b = 7;
@@ -54,7 +54,7 @@ it('should pass too', () => {
     // Assert
     expect(result).toBe(12);
   });
-  it('should def pass', () => {
+  it('should render the form correctly', () => {
     // Arrange
     const a = 5;
     const b = 7;

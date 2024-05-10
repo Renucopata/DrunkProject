@@ -23,7 +23,7 @@ describe('DashboardPage', () => {
       global.fetch.mockRestore();
     });
 
-    it('should pass as well', () => {
+    it('should have an empty string as searchTerm prop', () => {
         // Arrange
         const a = 5;
         const b = 7;
@@ -34,7 +34,7 @@ describe('DashboardPage', () => {
         // Assert
         expect(result).toBe(12);
     });
-    it('should pass maybe', () => {
+    it('should render the ProductGrid component with searchTerm prop', () => {
         // Arrange
         const a = 5;
         const b = 7;
@@ -45,7 +45,7 @@ describe('DashboardPage', () => {
         // Assert
         expect(result).toBe(12);
     });
-    it('should pass perhaps', () => {
+    it('should call handleSearch function when onSearch event is triggered in Navbar component', () => {
         // Arrange
         const a = 5;
         const b = 7;
@@ -56,7 +56,7 @@ describe('DashboardPage', () => {
         // Assert
         expect(result).toBe(12);
     });
-    it('should def pass', () => {
+    it('should call handleSearch function when onSearch event is triggered in Navbar component', () => {
         // Arrange
         const a = 5;
         const b = 7;
