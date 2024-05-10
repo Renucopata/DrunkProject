@@ -23,7 +23,7 @@ jobs:
         node-version: '14'
 
     - name: Change directory to frontend/client
-      run: cd frontend/client
+      run: cd DrunkProject/frontend/client
 
     - name: Install dependencies
       run: npm install
