@@ -10,18 +10,18 @@ jobs:
   test:
     name: Run unit tests
     runs-on: ubuntu-20.04
+    env:
+      PROJECT_PATH: frontend/client
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
       with:
         ref: dev  # Checkout the dev branch
-        path: frontend/client
-        fetch-depth: 0
-    - name: Change permissions
-      run: chmod -R 777 frontend/client
     - name: Install dependencies
       run: npm install
+      working-directory: ${{ github.workspace }}/${{ env.PROJECT_PATH }}
 
     - name: Run tests
       run:  npm test
+      working-directory: ${{ github.workspace }}/${{ env.PROJECT_PATH }}
